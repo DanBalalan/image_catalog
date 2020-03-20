@@ -25,3 +25,9 @@ class UploadImageView(View):
         else:
             return HttpResponse('Upload Error: invalid form data')
 
+
+class CatalogView(View):
+
+    def get(self, request):
+        images = Image.objects.all()
+        return render(request, 'catalog.html', {'images': images})

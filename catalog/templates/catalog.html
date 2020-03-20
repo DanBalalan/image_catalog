@@ -1,0 +1,8 @@
+{% for img in images %}
+    <div class="">
+        <img src="{{ img.file.url }}" width="150px"/>
+        <p>{{ img.name }}</p>
+        <p>{{ img.description }}</p>
+        <p>{{ img.created }}</p>
+    </div>
+{% endfor %}
