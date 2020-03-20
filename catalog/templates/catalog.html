@@ -1,8 +1,12 @@
+{% if not images %}
+<p>Тут пусто, <a href="{% url 'uploadimage' %}">добавь изображение</a></p>
+{% endif %}
 {% for img in images %}
-    <div class="">
+    <div class="catalog_item" style="float: left; border: 1px solid black">
         <img src="{{ img.file.url }}" width="150px"/>
         <p>{{ img.name }}</p>
         <p>{{ img.description }}</p>
         <p>{{ img.created }}</p>
+        <a href="{% url 'imagedetail' image_id=img.id %}">Редактировать</a>
     </div>
 {% endfor %}

@@ -21,7 +21,7 @@ class UploadImageView(View):
                 created=form.cleaned_data['created']
             )
             instance.save()
-            return HttpResponse('success')
+            return HttpResponse('image uploaded')
         else:
             return HttpResponse('Upload Error: invalid form data')
 
@@ -31,3 +31,18 @@ class CatalogView(View):
     def get(self, request):
         images = Image.objects.all()
         return render(request, 'catalog.html', {'images': images})
+
+
+class ImageDetailView(View):
+
+    def get(self, request, image_id):
+        image = Image.objects.get(pk=image_id)
+        return render(request, 'image.html', {'image': image})
+
+
+class ImageDeleteView(View):
+
+    def get(self, request, image_id):
+        image = Image.objects.get(pk=image_id)
+        image.delete()
+        return HttpResponse('image deleted')

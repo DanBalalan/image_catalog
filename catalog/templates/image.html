@@ -1,0 +1,7 @@
+<div>
+    <img src="{{ image.file.url }}" width="250px"/>
+    <p>{{ image.name }}</p>
+    <p>{{ image.description }}</p>
+    <p>{{ image.created }}</p>
+    <a href="{% url 'imagedelete' image_id=image.id %}">Удалить</a>
+</div>
