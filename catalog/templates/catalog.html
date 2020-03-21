@@ -1,5 +1,14 @@
-{% if not images %}
-<p>Тут пусто, <a href="{% url 'uploadimage' %}">добавь изображение</a></p>
+<form method="post" action="{% url 'imagesearch' %}">
+    {% csrf_token %}
+    <p>Поиск изображений:</p>
+    {{ form }}
+    <input type="submit" value="Найти">
+</form>
+{% if images %}
+{% if search %}
+<p>Результаты поиска:</p>
+{% else %}
+<p>Весь каталог:</p>
 {% endif %}
 {% for img in images %}
     <div class="catalog_item" style="float: left; border: 1px solid black">
@@ -10,3 +19,10 @@
         <a href="{% url 'imagedetail' image_id=img.id %}">Редактировать</a>
     </div>
 {% endfor %}
+{% else %}
+{% if search %}
+<p>Ничего не найдено</p>
+{% else %}
+<p>Тут пусто, <a href="{% url 'uploadimage' %}">добавь изображение</a></p>
+{% endif %}
+{% endif %}
