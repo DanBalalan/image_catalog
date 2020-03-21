@@ -1,8 +1,8 @@
-from django import forms
+from django.forms import ModelForm
+from .models import Image
 
 
-class ImageUploadForm(forms.Form):
-    image = forms.ImageField()
-    name = forms.CharField(max_length=100)
-    description = forms.CharField(max_length=500)
-    created = forms.DateField()
+class ImageForm(ModelForm):
+    class Meta:
+        model = Image
+        fields = ['file', 'name', 'description', 'created']
