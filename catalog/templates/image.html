@@ -1,7 +1,10 @@
 <div>
-    <img src="{{ image.file.url }}" width="250px"/>
-    <p>{{ image.name }}</p>
-    <p>{{ image.description }}</p>
-    <p>{{ image.created }}</p>
-    <a href="{% url 'imagedelete' image_id=image.id %}">Удалить</a>
+    <form action="{% url 'imagedetail' image_id=image.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <img src="{{ image.file.url }}" width="250px"/>
+        <p>{{ image.name }}</p>
+        {{ form }}
+        <input type="submit" value="Сохранить изменения">
+        <a href="{% url 'imagedelete' image_id=image.id %}">Удалить</a>
+    </form>
 </div>

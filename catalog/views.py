@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse
-from .forms import ImageForm
+from .forms import ImageForm, ImageUpdateForm
 from .models import Image
 
 
@@ -37,7 +37,19 @@ class ImageDetailView(View):
 
     def get(self, request, image_id):
         image = Image.objects.get(pk=image_id)
-        return render(request, 'image.html', {'image': image})
+        form = ImageUpdateForm(instance=image)
+        return render(request, 'image.html', {'image': image, 'form': form})
+
+    def post(self, request, image_id):
+        image = Image.objects.get(pk=image_id)
+        form = ImageUpdateForm(request.POST)
+        if form.is_valid():
+            image.description = form.cleaned_data['description']
+            image.created = form.cleaned_data['created']
+            image.save()
+            return HttpResponse('updated successfully')
+        else:
+            return HttpResponse('error: invalid form data')
 
 
 class ImageDeleteView(View):

@@ -6,3 +6,9 @@ class ImageForm(ModelForm):
     class Meta:
         model = Image
         fields = ['file', 'name', 'description', 'created']
+
+
+class ImageUpdateForm(ModelForm):
+    class Meta:
+        model = Image
+        fields = ['description', 'created']
