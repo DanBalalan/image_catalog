@@ -5,7 +5,7 @@ from .forms import ImageForm, ImageUpdateForm, ImageSearchForm
 from .models import Image
 
 
-class UploadImageView(View):
+class ImageUploadView(View):
 
     def get(self, request):
         form = ImageForm()
